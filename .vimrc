@@ -51,18 +51,19 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 set relativenumber
 set nu
+set tabstop=4
+set expandtab
 set ai
 set cursorline
 set shiftwidth=4
 set background=dark
 set hlsearch
-set tabstop=4
 
 syntax enable
 let g:molokai_original = 1
 let g:rehash256 = 1
 set t_Co=256
-"set mouse=a
+set mouse=a
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -87,6 +88,15 @@ let g:ctrlp_user_command = 'find %s -type f'
 " let g:indentLine_enabled = 0
 " let g:indentLine_setConceal = 0
 " set list lcs=tab:\|\
+func! RubyIndent()
+    set shiftwidth=2
+	set softtabstop=2
+endf
+
+func! NormalIndent()
+    set shiftwidth=4
+	set softtabstop=4
+endf
 
 function! Pair( part )
 	let l:next_char = strpart( getline( '.' ), col('.'), 1 )
@@ -97,6 +107,15 @@ function! Pair( part )
 	endif
 endfunction
 
+func! CodeStyle()
+    exec "w"
+    let l:exp = expand("%:e")
+    if l:exp == 'py'
+        exec "!pep8 %"
+    elseif l:exp == 'rb'
+        exec "!rubocop %"
+    endif
+endf
 " expand( "%:e" )
 func! Compile()
 	exec "w"
@@ -156,6 +175,7 @@ inoremap ] <Esc>:call Pair("]")<cr>a
 
 nnoremap <F5> :call Compile()<cr>
 nnoremap <F6> :call CompilePython3()<cr>
+nnoremap <F7> :call CodeStyle()<cr>
 nnoremap <c-j> :m+<cr>
 nnoremap <c-k> :m-2<cr>
 nnoremap <c-h> :tabp<cr>
