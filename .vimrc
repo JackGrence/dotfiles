@@ -181,9 +181,9 @@ nnoremap <c-k> :m-2<cr>
 nnoremap <c-h> :tabp<cr>
 nnoremap <c-l> :tabn<cr>
 
-vnoremap ( xi()<esc>hp
-vnoremap [ xi[]<esc>hp
-vnoremap { xi{}<esc>hp
+vnoremap ( s()<esc>hp
+vnoremap [ s[]<esc>hp
+vnoremap { s{}<esc>hp
 vnoremap <c-j> :m '>+1<CR>gv=gv
 vnoremap <c-k> :m '<-2<CR>gv=gv
 
