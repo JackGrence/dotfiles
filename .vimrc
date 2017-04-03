@@ -184,6 +184,9 @@ nnoremap <c-l> :tabn<cr>
 vnoremap ( xi()<esc>hp
 vnoremap [ xi[]<esc>hp
 vnoremap { xi{}<esc>hp
+vnoremap <c-j> :m '>+1<CR>gv=gv
+vnoremap <c-k> :m '<-2<CR>gv=gv
+
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
