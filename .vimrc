@@ -63,7 +63,7 @@ syntax enable
 let g:molokai_original = 1
 let g:rehash256 = 1
 set t_Co=256
-set mouse=a
+set mouse=n
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
