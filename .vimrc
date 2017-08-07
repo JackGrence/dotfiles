@@ -32,6 +32,7 @@ Plugin 'https://github.com/Valloric/YouCompleteMe.git'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'
 "Plugin 'tomasr/molokai'
 " Plugin 'Yggdroot/indentLine'
 " Plugin 'nathanaelkane/vim-indent-guides'
@@ -128,7 +129,13 @@ func! Compile()
 		call CompileJava()
 	elseif l:exp == 'rb'
 		call CompileRuby()
+    elseif l:exp == 'R'
+        call CompileR()
 	endif
+endf
+
+func! CompileR()
+    exec "!Rscript %"
 endf
 
 func! CompileRuby()
@@ -195,7 +202,7 @@ set laststatus=2
 let g:airline_theme='dark'
 
 " tagbar
-let g:tagbar_left = 1
+" let g:tagbar_left = 1
 let g:tagbar_width = 30
 nmap <F8> :TagbarToggle<CR>
 autocmd VimEnter * nested :TagbarOpen
