@@ -118,6 +118,16 @@ func! CodeStyle()
     endif
 endf
 " expand( "%:e" )
+func! CompileVer2()
+	exec "w"
+	let l:exp = expand( "%:e" )
+	if l:exp == 'py'
+		call CompilePython3()
+	elseif l:exp == 'asm'
+		call CompileAsm_x86()
+	endif
+endf
+
 func! Compile()
 	exec "w"
 	let l:exp = expand( "%:e" )
@@ -131,7 +141,24 @@ func! Compile()
 		call CompileRuby()
     elseif l:exp == 'R'
         call CompileR()
+    elseif l:exp == 'asm'
+        call CompileAsm()
 	endif
+endf
+
+func! CompileAsm()
+    call inputsave()
+    echo '(1)elf64 (2)elf32'
+    let l:select = input('input:')
+    call inputrestore()
+
+    if l:select == '1'
+        exec "!nasm -f elf64 % && ld -s -o %< %<.o && ./%<"
+    elseif l:select == '2'
+        exec "!nasm -f elf32 % && ld -m elf_i386 -s -o %< %<.o && ./%<"
+    endif
+
+    exec "!for i in $(objdump -d readfile_x86 | grep '^ ' | cut -f2); do echo -n \\\\x$i;  done; echo"
 endf
 
 func! CompileR()
@@ -147,13 +174,18 @@ func! CompileJava()
 endf
 
 func! CompilePython()
-	exec "!python %"
+    call inputsave()
+    echo '(1)py2 (2)py3'
+    let l:select = input('input:')
+    call inputrestore()
+
+    if l:select == '1'
+        exec "!python %"
+    elseif l:select == '2'
+        exec "!python3 %"
+    endif
 endf
 
-func! CompilePython3()
-	exec "w"
-	exec "!python3 %"
-endf
 
 func! CompileC()
 	exec "!gcc % -o %<.out && ./%<.out"
@@ -181,7 +213,6 @@ inoremap [ []<Esc>i
 inoremap ] <Esc>:call Pair("]")<cr>a
 
 nnoremap <F5> :call Compile()<cr>
-nnoremap <F6> :call CompilePython3()<cr>
 nnoremap <F7> :call CodeStyle()<cr>
 nnoremap <c-j> :m+<cr>
 nnoremap <c-k> :m-2<cr>
