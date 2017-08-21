@@ -33,6 +33,12 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
 "Plugin 'tomasr/molokai'
 " Plugin 'Yggdroot/indentLine'
 " Plugin 'nathanaelkane/vim-indent-guides'
@@ -158,7 +164,7 @@ func! CompileAsm()
         exec "!nasm -f elf32 % && ld -m elf_i386 -s -o %< %<.o && ./%<"
     endif
 
-    exec "!for i in $(objdump -d readfile_x86 | grep '^ ' | cut -f2); do echo -n \\\\x$i;  done; echo"
+    exec "!count=0;for i in $(objdump -d %< | grep '^ ' | cut -f2); do echo -n \\\\x$i; count=$(($count+1)); done; echo; echo length:$count"
 endf
 
 func! CompileR()
@@ -271,3 +277,12 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:EclimCompletionMethod = 'omnifunc'
+
+" Ultisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-a>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"

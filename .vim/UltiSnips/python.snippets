@@ -1,0 +1,13 @@
+snippet gdb "use gdb to debug"
+from pwn import *
+
+
+${1:proc} = process('${2:filename}')
+gdb.attach($1, '''
+set follow-fork-mode child
+b ${3:main}
+continue
+''')
+$1.interactive()
+endsnippet
+	
