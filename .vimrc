@@ -79,10 +79,10 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(exe|so|dll)$',
+            \ 'link': 'some_bad_symbolic_links',
+            \ }
 let g:ctrlp_user_command = 'find %s -type f'
 " let g:indentLine_setColors = 0
 " let g:indentLine_color_tty_light = 7 " (default: 4)
@@ -97,21 +97,21 @@ let g:ctrlp_user_command = 'find %s -type f'
 " set list lcs=tab:\|\
 func! RubyIndent()
     set shiftwidth=2
-	set softtabstop=2
+    set softtabstop=2
 endf
 
 func! NormalIndent()
     set shiftwidth=4
-	set softtabstop=4
+    set softtabstop=4
 endf
 
 function! Pair( part )
-	let l:next_char = strpart( getline( '.' ), col('.'), 1 )
-	if l:next_char == a:part
-		execute 'normal! l'
-	else
-		execute 'normal! a' . a:part
-	endif
+    let l:next_char = strpart( getline( '.' ), col('.'), 1 )
+    if l:next_char == a:part
+        execute 'normal! l'
+    else
+        execute 'normal! a' . a:part
+    endif
 endfunction
 
 func! CodeStyle()
@@ -123,78 +123,89 @@ func! CodeStyle()
         exec "!rubocop %"
     endif
 endf
-" expand( "%:e" )
 
-func! Compile()
-	exec "w"
-	let l:exp = expand( "%:e" )
-	if l:exp == 'c'
-		call CompileC()
-	elseif l:exp == 'py'
-		call CompilePython()
-	elseif l:exp == 'java'
-		call CompileJava()
-	elseif l:exp == 'rb'
-		call CompileRuby()
+" expand( "%:e" )
+func! Compile(...)
+    exec "w"
+
+    let l:args = ''
+    if a:0 >= 1
+        call inputsave()
+        echo "\n"
+        let l:args = ' ' . input('input your args:')
+        call inputrestore()
+    endif
+
+    let l:exp = expand( "%:e" )
+    if l:exp == 'c'
+        exec CompileC() . l:args
+    elseif l:exp == 'py'
+        exec CompilePython() . l:args
+    elseif l:exp == 'java'
+        exec CompileJava() . l:args
+    elseif l:exp == 'rb'
+        exec CompileRuby() . l:args
     elseif l:exp == 'R'
-        call CompileR()
+        exec CompileR() . l:args
     elseif l:exp == 'asm'
-        call CompileAsm()
-	endif
+        exec CompileAsm() . l:args
+        exec "!count=0;for i in $(objdump -d %< | grep '^ ' | cut -f2); do echo -n \\\\x$i; count=$(($count+1)); done; echo; echo length:$count"
+    endif
 endf
 
 func! CompileAsm()
     call inputsave()
-    echo '(1)elf64 (2)elf32'
+    echo "\n(1)elf64 (2)elf32"
     let l:select = input('input:')
     call inputrestore()
 
     if l:select == '1'
-        exec "!nasm -f elf64 % && ld -s -o %< %<.o && ./%<"
+        return "!nasm -f elf64 % && ld -s -o %< %<.o && ./%<"
     elseif l:select == '2'
-        exec "!nasm -f elf32 % && ld -m elf_i386 -s -o %< %<.o && ./%<"
+        return "!nasm -f elf32 % && ld -m elf_i386 -s -o %< %<.o && ./%<"
     endif
 
-    exec "!count=0;for i in $(objdump -d %< | grep '^ ' | cut -f2); do echo -n \\\\x$i; count=$(($count+1)); done; echo; echo length:$count"
+    return 'protect'
 endf
 
 func! CompileR()
-    exec "!Rscript %"
+    return "!Rscript %"
 endf
 
 func! CompileRuby()
-	exec "!ruby %"
+    return "!ruby %"
 endf
 
 func! CompileJava()
-	exec "!sed -e 's/$/\r/' % > ms_% && javac -d . % && java %<"
+    return "!sed -e 's/$/\r/' % > ms_% && javac -d . % && java %<"
 endf
 
 func! CompilePython()
     call inputsave()
-    echo '(1)py2 (2)py3'
+    echo "\n(1)py2 (2)py3"
     let l:select = input('input:')
     call inputrestore()
 
     if l:select == '1'
-        exec "!python %"
+        return "!python %"
     elseif l:select == '2'
-        exec "!python3 %"
+        return "!python3 %"
     endif
+    return 'protect'
 endf
 
 
 func! CompileC()
-	exec "!gcc % -o %<.out && ./%<.out"
+    return "!gcc % -o %<.out && ./%<.out"
 endf
 " other------
 func! ToWindows()
-	exec "!sed -e 's/$/\r/' % > ms_%"
+    exec "!sed -e 's/$/\r/' % > ms_%"
 endf
 " test--------
 func! MakeProject()
-	exec "!make"
-	exec "!./%<"
+    exec "!make"
+    exec "!./%<"
 endf
 
 
@@ -210,6 +221,7 @@ inoremap [ []<Esc>i
 inoremap ] <Esc>:call Pair("]")<cr>a
 
 nnoremap <F5> :call Compile()<cr>
+nnoremap <F6> :call Compile('with_arg')<cr>
 nnoremap <F7> :call CodeStyle()<cr>
 nnoremap <c-j> :m+<cr>
 nnoremap <c-k> :m-2<cr>
@@ -242,8 +254,8 @@ colorscheme molokai
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
-    endif
+    let g:airline_symbols = {}
+endif
 
 " unicode symbols
 " let g:airline_left_sep = '»'
