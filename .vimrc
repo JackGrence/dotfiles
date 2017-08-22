@@ -124,15 +124,6 @@ func! CodeStyle()
     endif
 endf
 " expand( "%:e" )
-func! CompileVer2()
-	exec "w"
-	let l:exp = expand( "%:e" )
-	if l:exp == 'py'
-		call CompilePython3()
-	elseif l:exp == 'asm'
-		call CompileAsm_x86()
-	endif
-endf
 
 func! Compile()
 	exec "w"
