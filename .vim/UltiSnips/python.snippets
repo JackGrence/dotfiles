@@ -1,4 +1,4 @@
-snippet pwn "pwnable"
+snippet pwn "attach"
 from pwn import *
 import time
 import sys
@@ -15,7 +15,7 @@ if __name__ == '__main__':
 	if len(sys.argv) > 1:
 		proc = remote(connect[1], int(connect[2]))
 	else:
-		proc = process('${2:filename}')
+		proc = process(['${2:filename}'], env={'LD_LIBRARY_PATH': './'})
 		gdb.attach(proc, '''
 		set follow-fork-mode child
 		b *${3:main}+0x${4:00}
