@@ -4,8 +4,8 @@ import time
 import sys
 
 
-def exploit($2):
-	${6:pass}
+def exploit():
+	${5:pass}
 
 
 if __name__ == '__main__':
@@ -13,16 +13,16 @@ if __name__ == '__main__':
 	connect = '${1:nc localhost port}'
 	connect = connect.split(' ')
 	if len(sys.argv) > 1:
-		${2:proc} = remote(connect[1], int(connect[2]))
+		proc = remote(connect[1], int(connect[2]))
 	else:
-		$2 = process('${3:filename}')
-		gdb.attach($2, '''
+		proc = process('${2:filename}')
+		gdb.attach(proc, '''
 		set follow-fork-mode child
-		b *${4:main}+0x${5:00}
+		b *${3:main}+0x${4:00}
 		continue
 		''')
-	exploit($2)
-	$2.interactive()
+	exploit()
+	proc.interactive()
 endsnippet
 
 
