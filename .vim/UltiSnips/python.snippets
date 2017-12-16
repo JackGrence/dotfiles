@@ -1,3 +1,26 @@
+snippet pwn "wait attach - CLI mode"
+from pwn import *
+import time
+import sys
+
+
+def exploit():
+	raw_input('wait')
+
+
+if __name__ == '__main__':
+	context.arch = 'amd64'
+	connect = '${1:nc localhost port}'
+	connect = connect.split(' ')
+	if len(sys.argv) > 1:
+		proc = remote(connect[1], int(connect[2]))
+	else:
+		proc = process(['${2:filename}'], env={'LD_LIBRARY_PATH': './'})
+	exploit()
+	proc.interactive()
+endsnippet
+
+
 snippet pwn "attach"
 from pwn import *
 import time
