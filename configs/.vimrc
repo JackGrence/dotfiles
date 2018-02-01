@@ -66,6 +66,7 @@ set cursorline
 set shiftwidth=4
 set background=dark
 set hlsearch
+set encoding=utf-8
 
 syntax enable
 let g:molokai_original = 1
