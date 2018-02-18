@@ -162,9 +162,9 @@ func! CompileAsm()
     call inputrestore()
 
     if l:select == '1'
-        return "!nasm -f elf64 % && ld -s -o %< %<.o && ./%<"
+        return "!nasm -f elf64 -g % && ld -o %< %<.o && ./%<"
     elseif l:select == '2'
-        return "!nasm -f elf32 % && ld -m elf_i386 -s -o %< %<.o && ./%<"
+        return "!nasm -f elf32 -g % && ld -m elf_i386 -o %< %<.o && ./%<"
     endif
 
     return 'protect'
