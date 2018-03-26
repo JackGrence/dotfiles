@@ -11,7 +11,7 @@ bindkey "^[[1;5A" focus up
 bindkey "^[[1;5B" focus down
 
 # default windows
-screen -t Shell1  0 bash
-screen -t Shell2  1 bash
-screen -t Debug   2 gdb
+screen -t Develop  0 bash
+screen -t Output   1 bash
+screen -t Debug    2 bash
 select 0
