@@ -9,3 +9,9 @@ bindkey "^[[1;5D" focus left
 bindkey "^[[1;5C" focus right
 bindkey "^[[1;5A" focus up
 bindkey "^[[1;5B" focus down
+
+# default windows
+screen -t Shell1  0 bash
+screen -t Shell2  1 bash
+screen -t Debug   2 gdb
+select 0
