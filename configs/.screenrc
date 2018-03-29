@@ -15,3 +15,5 @@ screen -t Develop  0 bash
 screen -t Output   1 bash
 screen -t Debug    2 bash
 select 0
+
+utf8 on on
