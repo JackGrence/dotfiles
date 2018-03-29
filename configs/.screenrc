@@ -1,4 +1,5 @@
-
+defencoding utf8
+encoding utf8 utf8
 # hardstatus alwayslastline "%{b kw}%H %{r}%1` %{w}| %{g}%c %{w}| %{y}%d.%m.%Y %{w}| %{g}%l %{w}| %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<"
 hardstatus alwayslastline '%{= kG}[%{G}%H%? %1`%?%{g}][%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}][%{B}%m/%d %{W}%C%A%{g}]'
 
@@ -15,5 +16,3 @@ screen -t Develop  0 bash
 screen -t Output   1 bash
 screen -t Debug    2 bash
 select 0
-
-utf8 on on
