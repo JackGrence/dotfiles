@@ -59,14 +59,19 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 set relativenumber
 set nu
-set tabstop=4
-set expandtab
 set ai
 set cursorline
-set shiftwidth=4
 set background=dark
 set hlsearch
 set encoding=utf-8
+
+" GNU Coding Standards
+setlocal cindent
+setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
+setlocal shiftwidth=2
+setlocal softtabstop=2
+setlocal textwidth=79
+setlocal fo-=ro fo+=cql
 
 syntax enable
 let g:molokai_original = 1
@@ -101,20 +106,6 @@ func! RubyIndent()
     set shiftwidth=2
     set softtabstop=2
 endf
-
-func! NormalIndent()
-    set shiftwidth=4
-    set softtabstop=4
-endf
-
-function! Pair( part )
-    let l:next_char = strpart( getline( '.' ), col('.'), 1 )
-    if l:next_char == a:part
-        execute 'normal! l'
-    else
-        execute 'normal! a' . a:part
-    endif
-endfunction
 
 func! CodeStyle()
     exec "w"
@@ -215,12 +206,6 @@ endf
 " ------------
 
 set pastetoggle=<F2>
-inoremap } <Esc>:call Pair("}")<cr>a
-inoremap ( ()<Esc>i
-inoremap ) <Esc>:call Pair(")")<cr>a
-inoremap {<CR> {<CR>}<Esc>ko
-inoremap [ []<Esc>i
-inoremap ] <Esc>:call Pair("]")<cr>a
 
 nnoremap <F5> :call Compile()<cr>
 nnoremap <F6> :call Compile('with_arg')<cr>
@@ -230,9 +215,6 @@ nnoremap <c-k> :m-2<cr>
 nnoremap <c-h> :tabp<cr>
 nnoremap <c-l> :tabn<cr>
 
-vnoremap ( s()<esc>hp
-vnoremap [ s[]<esc>hp
-vnoremap { s{}<esc>hp
 vnoremap <c-j> :m '>+1<CR>gv=gv
 vnoremap <c-k> :m '<-2<CR>gv=gv
 
