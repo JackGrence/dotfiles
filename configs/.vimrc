@@ -198,7 +198,7 @@ endf
 
 
 func! CompileC()
-    return "!gcc % -o %<.out && ./%<.out"
+    return "!gcc % -o %<.out -g && ./%<.out"
 endf
 " other------
 func! ToWindows()
