@@ -65,14 +65,6 @@ set background=dark
 set hlsearch
 set encoding=utf-8
 
-" GNU Coding Standards
-setlocal cindent
-setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
-setlocal shiftwidth=2
-setlocal softtabstop=2
-setlocal textwidth=79
-setlocal fo-=ro fo+=cql
-
 syntax enable
 let g:molokai_original = 1
 let g:rehash256 = 1
@@ -102,6 +94,16 @@ let g:ctrlp_user_command = 'find %s -type f'
 " let g:indentLine_enabled = 0
 " let g:indentLine_setConceal = 0
 " set list lcs=tab:\|\
+func! CIndent()
+" GNU Coding Standards
+setlocal cindent
+setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
+setlocal shiftwidth=2
+setlocal softtabstop=2
+setlocal textwidth=79
+setlocal fo-=ro fo+=cql
+endf
+
 func! RubyIndent()
     set shiftwidth=2
     set softtabstop=2
