@@ -115,7 +115,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-#my setting
+
+# my setting
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
@@ -130,3 +131,6 @@ function _update_ps1() {
 if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
+
+# tmux
+export EDITOR=vim
