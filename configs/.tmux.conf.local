@@ -72,17 +72,17 @@ tmux_conf_theme_pane_active_indicator='#00afff'         # light blue
 
 # status line style
 tmux_conf_theme_message_fg='#000000'                    # black
-tmux_conf_theme_message_bg='#ffff00'                    # yellow
+tmux_conf_theme_message_bg='#bf80ff'                    # yellow
 tmux_conf_theme_message_attr='bold'
 
 # status line command style (<prefix> : Escape)
-tmux_conf_theme_message_command_fg='#ffff00'            # yellow
+tmux_conf_theme_message_command_fg='#bf80ff'            # yellow
 tmux_conf_theme_message_command_bg='#000000'            # black
 tmux_conf_theme_message_command_attr='bold'
 
 # window modes style
 tmux_conf_theme_mode_fg='#000000'                       # black
-tmux_conf_theme_mode_bg='#ffff00'                       # yellow
+tmux_conf_theme_mode_bg='#e6e6e6'                       # yellow
 tmux_conf_theme_mode_attr='bold'
 
 # status line style
