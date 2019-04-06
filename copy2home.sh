@@ -2,26 +2,43 @@
 
 # install needed package
 sudo apt-get install python-pip python-dev build-essential tmux automake pkg-config
-sudo pip install powerline-shell
-pushd ~
-git clone https://github.com/gpakosz/.tmux.git
-ln -s -f .tmux/.tmux.conf
-cp .tmux/.tmux.conf.local .
-popd
+sudo python3 -m pip install powerline-shell
+
+read -p "Install tmux? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	pushd ~
+	git clone https://github.com/gpakosz/.tmux.git
+	ln -s -f .tmux/.tmux.conf
+	cp .tmux/.tmux.conf.local .
+	popd
+fi
 
 # copy my config
+echo "Copy my config to home..."
 cp -a configs/. ~/
 
 # install vim stuff
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim -c 'PluginInstall' -c 'qa!'
+read -p "Install vim plugin? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	vim -c 'PluginInstall' -c 'qa!'
+fi
 
 # install ctag
-pushd /tmp
-git clone https://github.com/universal-ctags/ctags.git
-cd ctags
-./autogen.sh
-./configure
-make
-sudo make install
-popd
+read -p "Install ctag? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	pushd /tmp
+	git clone https://github.com/universal-ctags/ctags.git
+	cd ctags
+	./autogen.sh
+	./configure
+	make
+	sudo make install
+	popd
+fi
