@@ -1,3 +1,3 @@
-for i in `ls -ap configs | grep -v /`; do
-  cp ~/$i configs/.;
+for i in `find configs/ -type f -printf "%P\n"`; do
+  cp ~/$i configs/$i;
 done
