@@ -138,7 +138,7 @@ func! CodeStyle()
     exec "w"
     let l:exp = expand("%:e")
     if l:exp == 'py'
-        exec "!pep8 %"
+        exec "!pycodestyle %"
     elseif l:exp == 'rb'
         exec "!rubocop %"
     endif
