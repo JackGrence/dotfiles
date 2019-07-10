@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install needed package
-sudo apt-get install python-pip python-dev build-essential tmux automake pkg-config
+sudo apt-get install python3-pip python-dev build-essential tmux automake pkg-config curl
 sudo python3 -m pip install powerline-shell
 
 read -p "Install tmux? " -n 1 -r
