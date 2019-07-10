@@ -3,6 +3,7 @@
 # install needed package
 sudo apt-get install python3-pip python-dev build-essential tmux automake pkg-config curl
 sudo python3 -m pip install powerline-shell
+sudo python -m pip install virtualenvwrapper
 
 read -p "Install tmux? " -n 1 -r
 echo    # (optional) move to a new line
