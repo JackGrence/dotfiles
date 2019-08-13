@@ -4,6 +4,7 @@
 sudo apt-get install python3-pip python-dev build-essential tmux automake pkg-config curl
 sudo python3 -m pip install powerline-shell
 sudo python -m pip install virtualenvwrapper
+sudp apt-get install rxvt-unicode
 
 read -p "Install tmux? " -n 1 -r
 echo    # (optional) move to a new line
@@ -43,3 +44,9 @@ then
 	sudo make install
 	popd
 fi
+
+pushd /tmp
+git clone https://github.com/majutsushi/urxvt-font-size.git
+mkdir -p ~/.urxvt/ext/
+cp urxvt-font-size/font-size ~/.urxvt/ext/
+popd
