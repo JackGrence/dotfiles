@@ -260,6 +260,7 @@ nmap <F8> :TagbarToggle<CR>
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 colorscheme molokai
+hi Normal guibg=NONE ctermbg=NONE
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
