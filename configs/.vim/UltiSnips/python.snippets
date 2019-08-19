@@ -5,7 +5,8 @@ import sys
 
 
 def exploit():
-	raw_input('wait')
+	if len(sys.argv) <= 1:
+		input('attach to pid: {}'.format(proc.proc.pid))
 
 
 if __name__ == '__main__':
