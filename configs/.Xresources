@@ -46,7 +46,7 @@ rofi.hide-scrollbar: true
 
 ! Transparent
 URxvt.transparent: true
-URxvt.shading:30
+URxvt.shading:20
 
 ! Change font size
 URxvt.perl-ext-common: ...,font-size
