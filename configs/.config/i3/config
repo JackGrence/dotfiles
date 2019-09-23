@@ -284,3 +284,6 @@ exec --no-startup-id setxkbmap -option ctrl:swapcaps
 
 # start ibus
 exec --no-startup-id ibus-daemon -x
+
+# screenshot
+bindsym Control+Print exec gnome-screenshot -ai
