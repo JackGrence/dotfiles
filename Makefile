@@ -4,7 +4,7 @@ all: ubuntu_package tmux vimplugin ctag urxvt conf2home
 ubuntu_package:
 	sudo apt-get install python3-pip python-dev build-essential tmux automake pkg-config curl
 	sudo python3 -m pip install powerline-shell
-	sudo python -m pip install virtualenvwrapper
+	sudo python3 -m pip install virtualenvwrapper
 	sudo apt-get install rxvt-unicode
 
 tmux:
