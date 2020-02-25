@@ -1,7 +1,7 @@
-all: ubuntu_package tmux vimplugin ctag urxvt conf2home
+all: ubuntu_package tmux ctag urxvt conf2home vimplugin
 
 ubuntu_package:
-	sudo apt-get -y install python3-pip python-dev build-essential tmux automake pkg-config curl
+	sudo apt-get -y install vim python3-pip python-dev build-essential tmux automake pkg-config curl
 	sudo python3 -m pip install powerline-shell
 	sudo -H python3 -m pip install virtualenvwrapper
 	sudo apt-get -y install rxvt-unicode
