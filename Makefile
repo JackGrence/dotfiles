@@ -16,7 +16,7 @@ conf2home:
 	cp -a configs/. ~/
 
 home2conf:
-	for i in `find configs/ -type f -printf "%P\n"`; do; cp ~/$i configs/$i; done
+	for i in `find configs/ -type f -printf "%P\n"`; do cp ~/$$i configs/$$i; done
 
 vimplugin:
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim; \
