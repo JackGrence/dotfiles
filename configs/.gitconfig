@@ -11,3 +11,5 @@
 	lg = !"git lg1"
 [push]
 	default = matching
+[color]
+	ui = auto
