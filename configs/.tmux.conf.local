@@ -294,4 +294,4 @@ bind C-a send-prefix
 #set -g status-position top
 
 # kill current session
-bind \ confirm-before -p "kill current session? (y/n)" kill-session
+bind \\ confirm-before -p "kill current session? (y/n)" kill-session
