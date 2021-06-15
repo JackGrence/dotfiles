@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # install needed package
-sudo apt-get install python3-pip python-dev build-essential tmux automake pkg-config curl
+sudo apt-get update
+sudo apt-get install python3-pip python-dev build-essential tmux automake pkg-config curl vim
 sudo python3 -m pip install powerline-shell
-sudo python -m pip install virtualenvwrapper
+sudo python3 -m pip install virtualenvwrapper
 sudo apt-get install rxvt-unicode
 
 read -p "Install tmux? " -n 1 -r
