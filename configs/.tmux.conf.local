@@ -181,7 +181,7 @@ tmux_conf_theme_right_separator_sub='|'
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_status_left=' (σ`∀´)σ #[bg=#343434,fg=#efefef] [#S] | Σ(´д`) #[bg=#343434,fg=#efefef] #{loadavg} '
-tmux_conf_theme_status_right=' #{prefix}#{pairing} #[bg=#343434,fg=#efefef] #{?battery_status, #{battery_status},}#{?battery_vbar, #{battery_vbar},}#{?battery_percentage, #{battery_percentage},} %R %d %b | #{username}#{root} | #{hostname} '
+tmux_conf_theme_status_right=' #{prefix}#{pairing} #[bg=#343434,fg=#efefef] #{?battery_status, #{battery_status},}#{?battery_vbar, #{battery_vbar},}#{?battery_percentage, #{battery_percentage},}#[fg=#efefef] %R %d %b | #{username}#{root} | #{hostname} '
 
 # status left style
 tmux_conf_theme_status_left_fg='#000000,#000000'  # black, white , black
