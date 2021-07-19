@@ -1,1 +1,3 @@
-# My .vimrc
+# My Linux Config
+
+![](./main.png)
