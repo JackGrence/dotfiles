@@ -120,11 +120,13 @@ func! CIndent()
     set softtabstop=2
     set textwidth=79
     set fo-=ro fo+=cql
+    set expandtab           " Use spaces instead of tabs
 endf
 
 func! RubyIndent()
     set shiftwidth=2
     set softtabstop=2
+    set expandtab           " Use spaces instead of tabs
 endf
 
 func! PHPIndent()
@@ -133,6 +135,12 @@ func! PHPIndent()
     set softtabstop=4       " Soft tab width
     set shiftwidth=4        " Shift width
     set expandtab           " Use spaces instead of tabs
+endf
+
+func! JSIndent()
+    set expandtab
+    set tabstop=2
+    set shiftwidth=2
 endf
 
 func! CodeStyle()
