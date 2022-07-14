@@ -1,14 +1,14 @@
 {
   "segments": [
     "virtual_env", 
-    "username", 
-    "hostname", 
-    "ssh", 
     "cwd", 
     "git", 
     "hg", 
     "jobs", 
     "root"
   ],
-  "theme": "~/.config/powerline-shell/themes/default.py"
+  "theme": "~/.config/powerline-shell/themes/myconfig.py",
+  "cwd": {
+    "mode": "dironly"
+  }
 }

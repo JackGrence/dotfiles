@@ -19,9 +19,9 @@ class DefaultColor(object):
     HOME_SPECIAL_DISPLAY = True
     HOME_BG = 31  # blueish
     HOME_FG = 15  # white
-    PATH_BG = 237  # dark grey
+    PATH_BG = 255  # dark grey
     PATH_FG = 250  # light grey
-    CWD_FG = 254  # nearly-white grey
+    CWD_FG = 235  # nearly-white grey
     SEPARATOR_FG = 244
 
     READONLY_BG = 124
