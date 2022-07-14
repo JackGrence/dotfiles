@@ -2,7 +2,9 @@
 
 # install needed package
 sudo apt-get update
-sudo apt-get install python3-pip python-dev build-essential tmux automake pkg-config curl vim
+sudo apt-get install python3-pip python3-dev
+sudo apt-get install build-essential automake pkg-config
+sudo apt-get install tmux curl vim-gtk
 sudo python3 -m pip install powerline-shell
 sudo python3 -m pip install virtualenvwrapper
 sudo apt-get install rxvt-unicode
