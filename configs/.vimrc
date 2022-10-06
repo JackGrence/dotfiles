@@ -262,7 +262,8 @@ let g:airline_theme='dark'
 " tagbar
 " let g:tagbar_left = 1
 let g:tagbar_width = 30
-nmap <F8> :TagbarToggle<CR>
+" ctrl + 8 // ctrl + v + key
+nmap <c-?> :TagbarToggle<CR>
 "autocmd VimEnter * nested :TagbarOpen
 "autocmd FileType * nested :call tagbar#autoopen(0)
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
