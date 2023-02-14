@@ -31,3 +31,5 @@ require('lualine').setup {
     -- ... your lualine config
   }
 }
+
+require('fidget').setup {}

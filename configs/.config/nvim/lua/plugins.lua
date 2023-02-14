@@ -103,4 +103,6 @@ return require('packer').startup(function(use)
 
   use 'preservim/tagbar'
 
+  use 'j-hui/fidget.nvim'
+
 end)
