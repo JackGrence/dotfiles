@@ -72,11 +72,11 @@ tmux_conf_theme_pane_active_indicator='#00afff'         # light blue
 
 # status line style
 tmux_conf_theme_message_fg='#f2f2f2'                    # black
-tmux_conf_theme_message_bg='#006600'                    # yellow
+tmux_conf_theme_message_bg='#2d2d2d'                    # yellow
 tmux_conf_theme_message_attr='bold'
 
 # status line command style (<prefix> : Escape)
-tmux_conf_theme_message_command_fg='#006600'            # yellow
+tmux_conf_theme_message_command_fg='#2d2d2d'            # yellow
 tmux_conf_theme_message_command_bg='#f2f2f2'            # black
 tmux_conf_theme_message_command_attr='bold'
 
@@ -186,11 +186,13 @@ tmux_conf_theme_status_right=' #{prefix}#{pairing} #[bg=#343434,fg=#efefef] #{?b
 # status left style
 tmux_conf_theme_status_left_fg='#000000,#000000'  # black, white , black
 tmux_conf_theme_status_left_bg='#7CFCFF,#7CFCFF'  # yellow, pink, white green
+tmux_conf_theme_status_left_bg='#c3c3c3,#c3c3c3'  # yellow, pink, white green
 tmux_conf_theme_status_left_attr='bold,none'
 
 # status right style
 tmux_conf_theme_status_right_fg='#000000,#000000,#efefef' # light gray, white, black
 tmux_conf_theme_status_right_bg='#d6ff8a,#d6ff8a,#343434' # dark gray, red, white
+tmux_conf_theme_status_right_bg='#c3c3c3,#c3c3c3,#343434' # dark gray, red, white
 tmux_conf_theme_status_right_attr='none,none,none'
 
 # pairing indicator
@@ -297,3 +299,12 @@ bind C-a send-prefix
 
 # kill current session
 bind \\ confirm-before -p "kill current session? (y/n)" kill-session
+
+# only this line might not be enough
+set -g default-terminal "xterm-256color"
+
+# Needs this line also to overrides the default color
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+set -g default-command /usr/bin/fish
+set -g default-shell /usr/bin/fish
