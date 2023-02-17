@@ -301,10 +301,10 @@ bind C-a send-prefix
 bind \\ confirm-before -p "kill current session? (y/n)" kill-session
 
 # only this line might not be enough
-set -g default-terminal "xterm-256color"
+set -g default-terminal "tmux-256color"
 
 # Needs this line also to overrides the default color
-set-option -ga terminal-overrides ",xterm-256color:Tc"
+set-option -ga terminal-overrides ",tmux-256color:Tc"
 
 set -g default-command /usr/bin/fish
 set -g default-shell /usr/bin/fish
