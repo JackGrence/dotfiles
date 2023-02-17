@@ -89,6 +89,7 @@ return require('packer').startup(function(use)
       require("codeql").setup {
         additional_packs = {
           "~/code/codeql-home/codeql-repo/",
+          "~/.codeql/packages/",
           ".",
         },
         panel = {
@@ -104,5 +105,30 @@ return require('packer').startup(function(use)
   use 'preservim/tagbar'
 
   use 'j-hui/fidget.nvim'
+
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  })
+
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  }
+
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    -- or                            , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 
 end)
