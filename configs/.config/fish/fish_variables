@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:/snap/bin/nvim
+SETUVAR --export VIRTUAL_ENV_DISABLE_PROMPT:1
 SETUVAR __fish_initialized:3100
 SETUVAR fish_color_autosuggestion:BD93F9
 SETUVAR fish_color_cancel:\x2dr
