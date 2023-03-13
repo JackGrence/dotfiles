@@ -26,6 +26,7 @@ install () {
       $SUDO apt install -y fish
       $SUDO chsh -s `which fish`
       fish -c 'set -Ux EDITOR (which nvim)'
+      fish -c 'set -Ux VIRTUAL_ENV_DISABLE_PROMPT 1'
       ;;
   esac
 }
