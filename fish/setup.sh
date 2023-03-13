@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+SUDO='sudo'
+if [ "`id -u`" = "0" ]; then
+  SUDO=''
+fi
+
+update () {
+  mkdir -p ~/.config/fish
+  cp ./config.fish ~/.config/fish/
+  cp functions ~/.config/fish/ -r
+}
+
+diff () {
+  for fn in `ls ~/.config/fish/functions | grep -v fzf | grep -v fish_user | grep -v fisher`; do
+    cp ~/.config/fish/functions/$fn functions/
+  done
+}
+
+install () {
+  case "`uname`" in
+    Linux)
+      $SUDO apt install -y fish
+      $SUDO chsh -s `which fish`
+      fish -c 'set -Ux EDITOR (which nvim)'
+      ;;
+  esac
+}
+
+# change to script dir
+cd $(dirname "$0")
+
+case "$1" in
+  install)
+    install
+    update
+    ;;
+  update)
+    update
+    ;;
+  diff)
+    diff
+    ;;
+  *)
+    ;;
+esac

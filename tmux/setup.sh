@@ -8,17 +8,23 @@ if [ "`id -u`" = "0" ]; then
 fi
 
 update () {
-  cp ./.gitconfig ~/.gitconfig
+  cp ./.tmux.conf.local ~/
 }
 
 diff () {
-  cp ~/.gitconfig ./.gitconfig
+  for fn in `find . -type f | grep -v 'setup\...$'`; do
+    cp ~/$fn $fn
+  done
 }
 
 install () {
   case "`uname`" in
     Linux)
-      $SUDO apt install git
+      $SUDO apt install -y tmux git
+      pushd ~
+      git clone https://github.com/gpakosz/.tmux.git
+      ln -s -f .tmux/.tmux.conf
+      popd
       ;;
   esac
 }

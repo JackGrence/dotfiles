@@ -8,17 +8,24 @@ if [ "`id -u`" = "0" ]; then
 fi
 
 update () {
-  cp ./.gitconfig ~/.gitconfig
+  return
 }
 
 diff () {
-  cp ~/.gitconfig ./.gitconfig
+  return
 }
 
 install () {
   case "`uname`" in
     Linux)
-      $SUDO apt install git
+      $SUDO apt-get install -y autoconf pkg-config build-essential
+      pushd /tmp
+      git clone https://github.com/universal-ctags/ctags.git
+      cd ctags
+      ./autogen.sh
+      ./configure
+      make -j
+      $SUDO make install
       ;;
   esac
 }

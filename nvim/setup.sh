@@ -2,7 +2,13 @@
 
 set -e
 
+SUDO='sudo'
+if [ "`id -u`" = "0" ]; then
+  SUDO=''
+fi
+
 update () {
+  mkdir -p ~/.config/nvim
   cp ./lua ~/.config/nvim/ -r
   cp ./init.lua ~/.config/nvim/init.lua
 }
@@ -16,8 +22,11 @@ diff () {
 install () {
   case "`uname`" in
     Linux)
-      sudo apt install git
-      sudo snap install --beta nvim --classic
+      $SUDO apt install -y git
+      pushd /tmp/
+      wget https://github.com/neovim/neovim/releases/download/v0.8.3/nvim-linux64.deb
+      $SUDO apt install ./nvim-linux64.deb
+      popd
       git clone --depth 1 https://github.com/wbthomason/packer.nvim \
          ~/.local/share/nvim/site/pack/packer/start/packer.nvim
       ;;

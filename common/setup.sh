@@ -8,17 +8,17 @@ if [ "`id -u`" = "0" ]; then
 fi
 
 update () {
-  cp ./.gitconfig ~/.gitconfig
+  return
 }
 
 diff () {
-  cp ~/.gitconfig ./.gitconfig
+  return
 }
 
 install () {
   case "`uname`" in
     Linux)
-      $SUDO apt install git
+      $SUDO apt install -y git curl wget
       ;;
   esac
 }
