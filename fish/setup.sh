@@ -27,6 +27,7 @@ install () {
       $SUDO chsh -s `which fish`
       fish -c 'set -Ux EDITOR (which nvim)'
       fish -c 'set -Ux VIRTUAL_ENV_DISABLE_PROMPT 1'
+      fish -c 'fish_add_path -U ~/.local/bin'
       ;;
   esac
 }
