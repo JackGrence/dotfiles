@@ -8,9 +8,15 @@ import argparse
 # setup.py --platform=xxx
 parser = argparse.ArgumentParser(description='Manage dotfiles.')
 parser.add_argument('-m', '--mode', choices=['install', 'update', 'diff'],
-                    default='install')
-parser.add_argument('-p', '--platform')
-parser.add_argument('-c', '--config', required=False)
+                    default='install', help='''
+                    install: Install the config for first setup (default) |
+                    update: Copy the config files to home directory |
+                    diff: Copy the config files back from home directory
+                    ''')
+parser.add_argument('-p', '--platform',
+                    help='platform name (default: host platform)')
+parser.add_argument('-c', '--config', required=False,
+                    help='config folder (default: all from config.toml)')
 args = parser.parse_args()
 
 with open('config.toml', 'rb') as f:
