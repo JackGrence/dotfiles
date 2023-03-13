@@ -1,4 +1,4 @@
-# My Linux Config
+# My dotfiles
 
 ![](./main.png)
 
