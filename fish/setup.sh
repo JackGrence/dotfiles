@@ -14,6 +14,7 @@ update () {
 }
 
 diff () {
+  cp ~/.config/fish/config.fish .
   for fn in `ls ~/.config/fish/functions | grep -v fzf | grep -v fish_user | grep -v fisher`; do
     cp ~/.config/fish/functions/$fn functions/
   done
