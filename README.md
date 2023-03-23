@@ -22,7 +22,9 @@ Manage dotfiles.
 options:
   -h, --help            show this help message and exit
   -m {install,update,diff}, --mode {install,update,diff}
-                        install: Install the config for first setup (default) | update: Copy the config files to home directory | diff: Copy the config files back from home directory
+                        install: Install the config for first setup (default) |
+                        update: Copy the config files to home directory |
+                        diff: Copy the config files back from home directory
   -p PLATFORM, --platform PLATFORM
                         platform name (default: host platform)
   -c CONFIG, --config CONFIG
