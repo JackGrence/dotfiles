@@ -91,4 +91,10 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fc', function() builtin.find_files({hidden = true}) end, {})
+vim.keymap.set('n', '<leader>fc', function() builtin.find_files({hidden = true, no_ignore = true}) end, {})
+
+-- NvimTree
+local api = require('nvim-tree.api')
+vim.keymap.set('n', '<leader>tt', api.tree.toggle, {})
+vim.keymap.set('n', '<leader>to', api.tree.open, {})
+vim.keymap.set('n', '<leader>tc', api.tree.close, {})
