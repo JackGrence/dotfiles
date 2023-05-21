@@ -149,4 +149,6 @@ return require('packer').startup(function(use)
     end
   }
 
+  use 'mfussenegger/nvim-jdtls'
+
 end)

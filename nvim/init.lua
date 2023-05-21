@@ -52,6 +52,8 @@ lsp.configure('codeqlls', {
 -- attach navic
 lsp.on_attach(navic.attach)
 
+lsp.skip_server_setup({'jdtls'})
+
 lsp.setup()
 
 require('lualine').setup {

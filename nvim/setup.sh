@@ -11,6 +11,7 @@ update () {
   mkdir -p ~/.config/nvim
   cp ./lua ~/.config/nvim/ -r
   cp ./init.lua ~/.config/nvim/init.lua
+  cp ./plugin/jdtls.lua ~/.config/nvim/plugin/jdtls.lua
 }
 
 diff () {
