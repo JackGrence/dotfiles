@@ -63,6 +63,14 @@ require('lualine').setup {
     -- ... your lualine config
   },
   sections = {
+    lualine_b = {
+      'branch',
+      'diff',
+      {
+        'diagnostics',
+        symbols = {error = ' ', warn = ' ', info = ' ', hint = ''}
+      },
+    },
     lualine_c = {
       { 'filename' },
       { navic.get_location, cond = navic.is_available },
