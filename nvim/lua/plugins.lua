@@ -17,6 +17,11 @@ return require('packer').startup(function(use)
   -- Colorscheme
   use 'joshdick/onedark.vim'
   use 'https://gitlab.com/__tpb/monokai-pro.nvim'
+  use 'sainnhe/sonokai'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
   -- LSP
   use {
     'VonHeikemen/lsp-zero.nvim',

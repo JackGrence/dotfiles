@@ -31,7 +31,9 @@ vim.keymap.set('n', '<M-s>', '<Cmd>lua Source_vimrc()<CR>', nn_opts)
 
 require('plugins')
 
-vim.cmd[[colorscheme monokaipro]]
+vim.cmd[[colorscheme sonokai]]
+vim.api.nvim_set_hl(0, 'TabLineSel', { link = 'Search' })
+vim.api.nvim_set_hl(0, 'Title', { link = 'Directory' })
 vim.keymap.set('n', '<A-8>', '<Cmd>TagbarToggle<CR>', nn_opts)
 
 
@@ -59,7 +61,7 @@ lsp.setup()
 require('lualine').setup {
   options = {
     -- ... your lualine config
-    theme = 'monokaipro'
+    theme = 'sonokai'
     -- ... your lualine config
   },
   sections = {
@@ -68,7 +70,7 @@ require('lualine').setup {
       'diff',
       {
         'diagnostics',
-        symbols = {error = ' ', warn = ' ', info = ' ', hint = ''}
+        symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}
       },
     },
     lualine_c = {
