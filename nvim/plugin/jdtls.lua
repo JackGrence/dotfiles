@@ -16,7 +16,7 @@ local features = {
 
   -- change this to `true` if you have `nvim-dap`,
   -- `java-test` and `java-debug-adapter` installed
-  debugger = false,
+  debugger = true,
 }
 
 local function get_jdtls_paths()
@@ -119,9 +119,38 @@ local function enable_debugger(bufnr)
   require('jdtls').setup_dap({hotcodereplace = 'auto'})
   require('jdtls.dap').setup_dap_main_class_configs()
 
+  local dap, dapui = require("dap"), require("dapui")
+
   local opts = {buffer = bufnr}
   vim.keymap.set('n', '<leader>df', "<cmd>lua require('jdtls').test_class()<cr>", opts)
   vim.keymap.set('n', '<leader>dn', "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts)
+
+  vim.keymap.set('n', '<Leader>c', function() require('dap').continue() end)
+  vim.keymap.set('n', '<Leader>x', function() require('dap').step_over() end)
+  vim.keymap.set('n', '<Leader>s', function() require('dap').step_into() end)
+  vim.keymap.set('n', '<Leader>f', function() require('dap').step_out() end)
+  vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
+  vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
+  vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+  vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
+  vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+  -- vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+  --   require('dap.ui.widgets').hover()
+  -- end)
+  -- vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+  --   require('dap.ui.widgets').preview()
+  -- end)
+  -- vim.keymap.set('n', '<Leader>df', function()
+  --   local widgets = require('dap.ui.widgets')
+  --   widgets.centered_float(widgets.frames)
+  -- end)
+  -- vim.keymap.set('n', '<Leader>ds', function()
+  --   local widgets = require('dap.ui.widgets')
+  --   widgets.centered_float(widgets.scopes)
+  -- end)
+  dapui.setup()
+  vim.keymap.set('n', '<Leader>dt', function() require('dapui').open() end)
+  vim.keymap.set('n', '<Leader>dc', function() require('dapui').close() end)
 end
 
 local function jdtls_on_attach(client, bufnr)
