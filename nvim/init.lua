@@ -13,6 +13,7 @@ function Source_vimrc ()
     if input == 'y' then
       vim.cmd('tabe ' .. vim.fn.stdpath('config') .. '/lua/plugins.lua')
       vim.cmd('vsp ' .. os.getenv('MYVIMRC'))
+      vim.cmd('lcd ' .. vim.fn.stdpath('config'))
     else
       print('')
     end
