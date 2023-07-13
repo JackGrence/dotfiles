@@ -52,6 +52,14 @@ require('bufferline').setup {
   options = {
     mode = 'tabs',
   },
+  highlights = {
+    indicator_selected = {
+      fg = {
+        attribute = "fg",
+        highlight = "DiagnosticOk"
+      },
+    },
+  }
 }
 
 local navic = require('nvim-navic')
