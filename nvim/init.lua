@@ -72,11 +72,11 @@ lsp.skip_server_setup({'jdtls'})
 lsp.setup()
 
 require('lualine').setup {
-  options = {
-    -- ... your lualine config
-    theme = 'monokai-pro'
-    -- ... your lualine config
-  },
+  -- options = {
+  --   -- ... your lualine config
+  --   theme = 'monokai-pro'
+  --   -- ... your lualine config
+  -- },
   sections = {
     lualine_b = {
       'branch',
