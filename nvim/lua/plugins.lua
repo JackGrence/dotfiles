@@ -119,8 +119,6 @@ return require('packer').startup(function(use)
     end
   }
 
-  use 'preservim/tagbar'
-
   use {
     'j-hui/fidget.nvim',
     tag = 'legacy'
@@ -170,5 +168,7 @@ return require('packer').startup(function(use)
   }
 
   use 'mfussenegger/nvim-jdtls'
+
+  use 'simrat39/symbols-outline.nvim'
 
 end)

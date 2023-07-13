@@ -45,10 +45,14 @@ require('plugins')
 vim.cmd[[colorscheme monokai_pro]]
 -- vim.api.nvim_set_hl(0, 'TabLineSel', { link = 'Search' })
 -- vim.api.nvim_set_hl(0, 'Title', { link = 'Directory' })
-vim.keymap.set('n', '<A-8>', '<Cmd>TagbarToggle<CR>', nn_opts)
+vim.keymap.set('n', '<A-8>', '<Cmd>SymbolsOutline<CR>', nn_opts)
 
--- vim.opt.termguicolors = true
--- require('bufferline').setup{}
+vim.opt.termguicolors = true
+require('bufferline').setup {
+  options = {
+    mode = 'tabs',
+  },
+}
 
 local navic = require('nvim-navic')
 local lsp = require('lsp-zero')
@@ -127,3 +131,5 @@ local api = require('nvim-tree.api')
 vim.keymap.set('n', '<leader>tt', api.tree.toggle, {})
 vim.keymap.set('n', '<leader>to', api.tree.open, {})
 vim.keymap.set('n', '<leader>tc', api.tree.close, {})
+
+require('symbols-outline').setup()
