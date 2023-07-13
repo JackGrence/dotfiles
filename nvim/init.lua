@@ -47,8 +47,8 @@ vim.cmd[[colorscheme monokai-pro-default]]
 -- vim.api.nvim_set_hl(0, 'Title', { link = 'Directory' })
 vim.keymap.set('n', '<A-8>', '<Cmd>TagbarToggle<CR>', nn_opts)
 
-vim.opt.termguicolors = true
-require('bufferline').setup{}
+-- vim.opt.termguicolors = true
+-- require('bufferline').setup{}
 
 local navic = require('nvim-navic')
 local lsp = require('lsp-zero')
