@@ -26,17 +26,29 @@ vim.keymap.set('n', '<C-h>', '<Cmd>tabp<CR>', nn_opts)
 vim.keymap.set('n', '<C-l>', '<Cmd>tabn<CR>', nn_opts)
 vim.keymap.set('n', '<M-s>', '<Cmd>lua Source_vimrc()<CR>', nn_opts)
 
+function BufWipe_and_restart ()
+  local buf_name = vim.api.nvim_buf_get_name(0)
+  vim.cmd('e /tmp/nvim_wipe_and_restart')
+  vim.cmd('bw ' .. buf_name)
+  vim.cmd('e ' .. buf_name)
+  vim.cmd('bw /tmp/nvim_wipe_and_restart')
+end
+
+vim.keymap.set('n', '<leader>bw', function () BufWipe_and_restart() end, nn_opts)
+
 
 
 -- Plugin
 
 require('plugins')
 
-vim.cmd[[colorscheme sonokai]]
-vim.api.nvim_set_hl(0, 'TabLineSel', { link = 'Search' })
-vim.api.nvim_set_hl(0, 'Title', { link = 'Directory' })
+vim.cmd[[colorscheme monokai-pro-default]]
+-- vim.api.nvim_set_hl(0, 'TabLineSel', { link = 'Search' })
+-- vim.api.nvim_set_hl(0, 'Title', { link = 'Directory' })
 vim.keymap.set('n', '<A-8>', '<Cmd>TagbarToggle<CR>', nn_opts)
 
+vim.opt.termguicolors = true
+require('bufferline').setup{}
 
 local navic = require('nvim-navic')
 local lsp = require('lsp-zero')
@@ -62,7 +74,7 @@ lsp.setup()
 require('lualine').setup {
   options = {
     -- ... your lualine config
-    theme = 'sonokai'
+    theme = 'monokai-pro'
     -- ... your lualine config
   },
   sections = {
@@ -76,7 +88,11 @@ require('lualine').setup {
     },
     lualine_c = {
       { 'filename' },
-      { navic.get_location, cond = navic.is_available },
+      {
+        'navic',
+        color_correction = nil,
+        navic_opts = nil,
+      },
     }
   }
 }
