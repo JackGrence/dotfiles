@@ -42,7 +42,7 @@ vim.keymap.set('n', '<leader>bw', function () BufWipe_and_restart() end, nn_opts
 
 require('plugins')
 
-vim.cmd[[colorscheme monokai-pro-default]]
+vim.cmd[[colorscheme monokai_pro]]
 -- vim.api.nvim_set_hl(0, 'TabLineSel', { link = 'Search' })
 -- vim.api.nvim_set_hl(0, 'Title', { link = 'Directory' })
 vim.keymap.set('n', '<A-8>', '<Cmd>TagbarToggle<CR>', nn_opts)
