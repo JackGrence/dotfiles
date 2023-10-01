@@ -23,6 +23,8 @@ diff () {
 install () {
   case "`uname`" in
     Linux)
+      $SUDO apt-add-repository ppa:fish-shell/release-3
+      $SUDO apt update
       $SUDO apt install -y fish
       $SUDO chsh -s `which fish` `whoami`
       fish -c 'set -Ux EDITOR (which nvim)'

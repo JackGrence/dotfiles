@@ -21,6 +21,8 @@ diff () {
 install () {
   case "`uname`" in
     Linux)
+      git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+      ~/.fzf/install
       curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > /tmp/omf.fish
       fish /tmp/omf.fish --noninteractive
       fish -c 'omf install bobthefish'
@@ -30,7 +32,6 @@ install () {
       fish -c 'fisher install PatrickF1/fzf.fish'
       pushd /tmp/
       wget 'https://github.com/sharkdp/bat/releases/download/v0.22.1/bat-musl_0.22.1_amd64.deb'
-      $SUDO apt-get install fzf
       $SUDO dpkg -i bat-musl_0.22.1_amd64.deb
       $SUDO apt install fd-find
       popd
