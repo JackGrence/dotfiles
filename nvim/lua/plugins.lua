@@ -121,7 +121,6 @@ return require('packer').startup(function(use)
 
   use {
     'j-hui/fidget.nvim',
-    tag = 'legacy'
   }
 
   use({

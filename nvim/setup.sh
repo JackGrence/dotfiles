@@ -25,9 +25,9 @@ install () {
     Linux)
       $SUDO apt install -y git
       pushd /tmp/
-      wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
-      tar xzf ./nvim-linux64.tar.gz
-      cp ./nvim-linux64/* ~/.local/ -r
+      wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz -O nvim.tgz
+      tar xzf ./nvim.tgz
+      cp ./nvim-linux-x86_64/* ~/.local/ -r
       popd
       git clone --depth 1 https://github.com/wbthomason/packer.nvim \
          ~/.local/share/nvim/site/pack/packer/start/packer.nvim

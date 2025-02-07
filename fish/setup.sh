@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -xe
 
 SUDO='sudo'
 if [ "`id -u`" = "0" ]; then
@@ -27,9 +27,9 @@ install () {
       $SUDO apt update
       $SUDO apt install -y fish
       $SUDO chsh -s `which fish` `whoami`
+      fish -c 'fish_add_path -U ~/.local/bin'
       fish -c 'set -Ux EDITOR (which nvim)'
       fish -c 'set -Ux VIRTUAL_ENV_DISABLE_PROMPT 1'
-      fish -c 'fish_add_path -U ~/.local/bin'
       ;;
   esac
 }
