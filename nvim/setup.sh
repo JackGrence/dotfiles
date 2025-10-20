@@ -9,7 +9,8 @@ fi
 
 update () {
   mkdir -p ~/.config/nvim
-  cp ./nvim/* ~/.config/nvim/ -r
+  cp ./* ~/.config/nvim/ -r
+  rm ~/.config/nvim/setup.sh
 }
 
 diff () {
