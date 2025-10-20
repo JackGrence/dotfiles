@@ -8,10 +8,8 @@ if [ "`id -u`" = "0" ]; then
 fi
 
 update () {
-  mkdir -p ~/.config/nvim/plugin
-  cp ./lua ~/.config/nvim/ -r
-  cp ./init.lua ~/.config/nvim/init.lua
-  cp ./plugin/jdtls.lua ~/.config/nvim/plugin/jdtls.lua
+  mkdir -p ~/.config/nvim
+  cp ./nvim/* ~/.config/nvim/ -r
 }
 
 diff () {
@@ -29,8 +27,6 @@ install () {
       tar xzf ./nvim.tgz
       cp ./nvim-linux-x86_64/* ~/.local/ -r
       popd
-      git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-         ~/.local/share/nvim/site/pack/packer/start/packer.nvim
       ;;
   esac
 }
