@@ -1,3 +1,3 @@
 function grepsrc
-  grep --exclude=tags -rn $argv
+  grep --exclude=tags --exclude-dir=build -rn $argv
 end
