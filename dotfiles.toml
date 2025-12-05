@@ -1,0 +1,89 @@
+[config]
+backup_dir = "~/.dotfiles_backup"
+enabled = [
+    "git",
+    "fish",
+    "fish_extras",
+    "zellij",
+]
+
+[packages.lazyvim]
+depends_on = ["nvim"]
+install.linux = """
+mv ~/.config/nvim ~/.config/nvim.bak || true
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+"""
+links."lazyvim/colorscheme.lua" = "~/.config/nvim/lua/plugins/colorscheme.lua"
+
+[packages.nvim]
+install.linux = """
+sudo apt install -y git
+wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz -O /tmp/nvim.tgz
+tar xzf /tmp/nvim.tgz -C /tmp
+cp /tmp/nvim-linux-x86_64/* ~/.local/ -r
+"""
+links."nvim/init.lua" = "~/.config/nvim/init.lua"
+links."nvim/lua" = "~/.config/nvim/lua"
+
+[packages.git]
+install.linux = "sudo apt install git"
+links."git/.gitconfig" = "~/.gitconfig"
+
+[packages.tmux]
+install.linux = """
+sudo apt install -y tmux git
+git clone https://github.com/gpakosz/.tmux.git ~/.tmux || true
+ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
+"""
+links."tmux/.tmux.conf.local" = "~/.tmux.conf.local"
+
+[packages.fish]
+depends_on = ["nvim"]
+install.linux = """
+sudo apt-add-repository -y ppa:fish-shell/release-4
+sudo apt update
+sudo apt install -y fish
+sudo chsh -s $(which fish) $(whoami)
+fish -c 'fish_add_path -U ~/.local/bin'
+fish -c 'set -Ux EDITOR (which nvim)'
+fish -c 'set -Ux VIRTUAL_ENV_DISABLE_PROMPT 1'
+"""
+links."fish/config.fish" = "~/.config/fish/config.fish"
+links."fish/functions" = "~/.config/fish/functions"
+
+[packages.fish_extras]
+depends_on = ["fish"]
+install.linux = """
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf || true
+~/.fzf/install --all
+fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
+fish -c 'fisher install PatrickF1/fzf.fish'
+fish -c 'fisher install dracula/fish'
+fish -c 'fish_config theme choose "Dracula Official"'
+wget 'https://github.com/sharkdp/bat/releases/download/v0.22.1/bat-musl_0.22.1_amd64.deb' -O /tmp/bat.deb
+sudo dpkg -i /tmp/bat.deb
+sudo apt install -y fd-find
+"""
+
+[packages.omf]
+depends_on = ["fish"]
+install.linux = """
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > /tmp/omf.fish
+fish /tmp/omf.fish --noninteractive --yes
+fish -c 'omf install bobthefish'
+fish -c 'omf install https://github.com/dracula/fish'
+fish -c 'set -U theme_color_scheme zenburn'
+"""
+links."omf/bundle" = "~/.config/omf/bundle"
+links."omf/channel" = "~/.config/omf/channel"
+links."omf/theme" = "~/.config/omf/theme"
+
+[packages.zellij]
+install.linux = """
+wget 'https://github.com/zellij-org/zellij/releases/download/v0.43.1/zellij-no-web-x86_64-unknown-linux-musl.tar.gz' -O /tmp/zellij.tar.gz
+tar xzf /tmp/zellij.tar.gz -C /tmp
+cp /tmp/zellij ~/.local/bin/zellij
+"""
+links."zellij/config.kdl" = "~/.config/zellij/config.kdl"
+links."zellij/layouts" = "~/.config/zellij/layouts"

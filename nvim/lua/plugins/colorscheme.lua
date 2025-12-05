@@ -1,0 +1,1 @@
+/home/jack/code/dotfiles/lazyvim/colorscheme.lua

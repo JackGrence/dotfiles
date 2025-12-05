@@ -1,1 +1,5 @@
 *.swp
+fish/functions/_fzf*
+fish/functions/fish_user_key_bindings.fish
+fish/functions/fisher.fish
+fish/functions/fzf_configure_bindings.fish
