@@ -30,14 +30,6 @@ links."nvim/lua" = "~/.config/nvim/lua"
 install.linux = "sudo apt install git"
 links."git/.gitconfig" = "~/.gitconfig"
 
-[packages.tmux]
-install.linux = """
-sudo apt install -y tmux git
-git clone https://github.com/gpakosz/.tmux.git ~/.tmux || true
-ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
-"""
-links."tmux/.tmux.conf.local" = "~/.tmux.conf.local"
-
 [packages.fish]
 depends_on = ["nvim"]
 install.linux = """
@@ -65,19 +57,6 @@ wget 'https://github.com/sharkdp/bat/releases/download/v0.22.1/bat-musl_0.22.1_a
 sudo dpkg -i /tmp/bat.deb
 sudo apt install -y fd-find
 """
-
-[packages.omf]
-depends_on = ["fish"]
-install.linux = """
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > /tmp/omf.fish
-fish /tmp/omf.fish --noninteractive --yes
-fish -c 'omf install bobthefish'
-fish -c 'omf install https://github.com/dracula/fish'
-fish -c 'set -U theme_color_scheme zenburn'
-"""
-links."omf/bundle" = "~/.config/omf/bundle"
-links."omf/channel" = "~/.config/omf/channel"
-links."omf/theme" = "~/.config/omf/theme"
 
 [packages.zellij]
 install.linux = """
