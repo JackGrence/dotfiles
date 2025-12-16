@@ -39,7 +39,6 @@ sudo apt install -y fish
 sudo chsh -s $(which fish) $(whoami)
 fish -c 'fish_add_path -U ~/.local/bin'
 fish -c 'set -Ux EDITOR (which nvim)'
-fish -c 'set -Ux VIRTUAL_ENV_DISABLE_PROMPT 1'
 """
 links."fish/config.fish" = "~/.config/fish/config.fish"
 links."fish/functions" = "~/.config/fish/functions"
