@@ -8,38 +8,44 @@ tab_template name="ui" {
    }
 }
 
+pane_template name="sep" {
+  pane split_direction="horizontal" {
+    pane split_direction="vertical" {
+      pane
+      pane
+    }
+    pane split_direction="vertical" {
+      pane
+      pane
+    }
+    pane split_direction="vertical" {
+      pane
+      pane
+    }
+    pane split_direction="vertical" {
+      pane
+      pane
+    }
+  }
+}
+
 swap_tiled_layout name="dev" {
-    ui max_panes=5 {
+    ui max_panes=11 {
         pane split_direction="vertical" {
             pane
-            pane { children; }
-        }
-    }
-    ui max_panes=8 {
-        pane split_direction="vertical" {
-            pane { children; }
-            pane { pane; pane; pane; pane; }
-        }
-    }
-    ui max_panes=12 {
-        pane split_direction="vertical" {
-            pane { children; }
-            pane { pane; pane; pane; pane; }
-            pane { pane; pane; pane; pane; }
+            sep
         }
     }
 }
 
 swap_tiled_layout name="debug" {
-  ui max_panes=9 {
+  ui min_panes=5 {
     pane split_direction="vertical" {
       pane split_direction="horizontal" {
         pane size="10%"
         pane size="90%"
       }
-      pane split_direction="horizontal" {
-        pane { pane; pane; children; }
-      }
+      sep
     }
   }
 }
