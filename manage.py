@@ -10,9 +10,11 @@ from pathlib import Path
 
 CONFIG_FILE = 'dotfiles.toml'
 
+
 def load_config():
     with open(CONFIG_FILE, 'rb') as f:
         return tomllib.load(f)
+
 
 def run_shell(command):
     print(f"Running: {command}")
@@ -21,6 +23,7 @@ def run_shell(command):
     except subprocess.CalledProcessError as e:
         print(f"Error running command: {command}")
         print(e)
+
 
 def backup_file(path):
     if os.path.exists(path) or os.path.islink(path):
@@ -33,10 +36,11 @@ def backup_file(path):
                 os.remove(backup_path)
         os.rename(path, backup_path)
 
+
 def link_file(source, target):
     source = os.path.abspath(source)
     target = os.path.expanduser(target)
-    
+
     if os.path.islink(target):
         current_link = os.readlink(target)
         if current_link == source:
@@ -52,22 +56,31 @@ def link_file(source, target):
     os.symlink(source, target)
     print(f"Linked: {target} -> {source}")
 
+
 def install_package(name, pkg_config, current_platform, only_link=False):
     if not only_link:
-        print(f"Installing {name}...")
         install_cmd = pkg_config.get('install', {}).get(current_platform)
+        if not install_cmd:
+            install_cmd = pkg_config.get('install', {}).get('all')
+
         if install_cmd:
+            print(f"Installing {name}...")
             run_shell(install_cmd)
-    
+        else:
+            print(f"No installation command for {name} on {current_platform}")
+
     print(f"Linking {name}...")
     links = pkg_config.get('links', {})
     for src, dst in links.items():
         link_file(src, dst)
 
+
 def main():
     parser = argparse.ArgumentParser(description='Manage dotfiles')
-    parser.add_argument('command', choices=['install', 'link', 'status'], default='install', nargs='?')
-    parser.add_argument('packages', nargs='*', help='Specific packages to process')
+    parser.add_argument('command', choices=[
+                        'install', 'link', 'status'], default='install', nargs='?')
+    parser.add_argument('packages', nargs='*',
+                        help='Specific packages to process')
     args = parser.parse_args()
 
     if not os.path.exists(CONFIG_FILE):
@@ -76,25 +89,26 @@ def main():
 
     config = load_config()
     current_platform = platform.system().lower()
-    
+
     all_packages = config.get('packages', {})
-    
+
     # Determine which packages to process
     if args.packages:
         selected_names = set(args.packages)
     else:
-        selected_names = set(config.get('config', {}).get('enabled', all_packages.keys()))
+        selected_names = set(config.get('config', {}).get(
+            'enabled', all_packages.keys()))
 
     # Resolve dependencies for selected packages
     final_packages = set()
-    
+
     def add_package_and_deps(name):
         if name in final_packages:
             return
         if name not in all_packages:
             print(f"Warning: Package '{name}' not found in configuration.")
             return
-            
+
         final_packages.add(name)
         pkg = all_packages.get(name)
         for dep in pkg.get('depends_on', []):
@@ -106,7 +120,7 @@ def main():
     # Sort final list topologically
     sorted_packages = []
     visited = set()
-    
+
     def visit(name):
         if name in visited:
             return
@@ -126,9 +140,11 @@ def main():
             install_package(name, all_packages[name], current_platform)
     elif args.command == 'link':
         for name in sorted_packages:
-            install_package(name, all_packages[name], current_platform, only_link=True)
+            install_package(
+                name, all_packages[name], current_platform, only_link=True)
     elif args.command == 'status':
         print("Status check not implemented yet.")
+
 
 if __name__ == '__main__':
     main()
