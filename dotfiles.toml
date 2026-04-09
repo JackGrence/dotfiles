@@ -7,9 +7,12 @@ enabled = [
     "zellij",
 ]
 
+[packages.homebrew]
+install.darwin = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+
 [packages.lazyvim]
 depends_on = ["nvim"]
-install.linux = """
+install.all = """
 mv ~/.config/nvim ~/.config/nvim.bak || true
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
@@ -17,17 +20,21 @@ rm -rf ~/.config/nvim/.git
 links."lazyvim/colorscheme.lua" = "~/.config/nvim/lua/plugins/colorscheme.lua"
 
 [packages.nvim]
+depends_on = ["homebrew"]
 install.linux = """
 sudo apt install -y git
 wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz -O /tmp/nvim.tgz
 tar xzf /tmp/nvim.tgz -C /tmp
 cp /tmp/nvim-linux-x86_64/* ~/.local/ -r
 """
+install.darwin = "brew install neovim"
 links."nvim/init.lua" = "~/.config/nvim/init.lua"
 links."nvim/lua" = "~/.config/nvim/lua"
 
 [packages.git]
+depends_on = ["homebrew"]
 install.linux = "sudo apt install git"
+install.darwin = "brew install git"
 links."git/.gitconfig" = "~/.gitconfig"
 
 [packages.fish]
@@ -38,6 +45,14 @@ sudo apt update
 sudo apt install -y fish
 sudo chsh -s $(which fish) $(whoami)
 fish -c 'fish_add_path -U ~/.local/bin'
+fish -c 'set -Ux EDITOR (which nvim)'
+"""
+install.darwin = """
+brew install fish
+if ! grep -q "$(which fish)" /etc/shells; then
+    echo "$(which fish)" | sudo tee -a /etc/shells
+fi
+chsh -s "$(which fish)"
 fish -c 'set -Ux EDITOR (which nvim)'
 """
 links."fish/config.fish" = "~/.config/fish/config.fish"
@@ -56,12 +71,22 @@ wget 'https://github.com/sharkdp/bat/releases/download/v0.22.1/bat-musl_0.22.1_a
 sudo dpkg -i /tmp/bat.deb
 sudo apt install -y fd-find
 """
+install.darwin = """
+brew install fzf bat fd
+$(brew --prefix)/opt/fzf/install --all
+fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
+fish -c 'fisher install PatrickF1/fzf.fish'
+fish -c 'fisher install dracula/fish'
+fish -c 'fish_config theme choose "Dracula Official"'
+"""
 
 [packages.zellij]
+depends_on = ["homebrew"]
 install.linux = """
 wget 'https://github.com/zellij-org/zellij/releases/download/v0.43.1/zellij-no-web-x86_64-unknown-linux-musl.tar.gz' -O /tmp/zellij.tar.gz
 tar xzf /tmp/zellij.tar.gz -C /tmp
 cp /tmp/zellij ~/.local/bin/zellij
 """
+install.darwin = "brew install zellij"
 links."zellij/config.kdl" = "~/.config/zellij/config.kdl"
 links."zellij/layouts" = "~/.config/zellij/layouts"

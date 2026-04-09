@@ -5,6 +5,7 @@
 ## Installation
 
 * Python 3.11 or above (required for `tomllib`)
+* macOS (Homebrew required) or Linux (Ubuntu/Debian supported)
 
 ```bash
 git clone https://github.com/JackGrence/dotfiles.git
