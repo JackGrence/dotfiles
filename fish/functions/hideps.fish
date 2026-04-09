@@ -8,6 +8,5 @@ function hideps
 end
 
 function unhideps
-  source ~/.local/share/omf/themes/bobthefish/functions/fish_prompt.fish
-  source ~/.local/share/omf/themes/bobthefish/functions/fish_right_prompt.fish
+  fish_config prompt choose default
 end
