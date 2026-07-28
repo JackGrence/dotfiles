@@ -43,6 +43,7 @@ sudo apt update
 sudo apt install -y fish
 sudo chsh -s $(which fish) $(whoami)
 fish -c 'fish_add_path -U ~/.local/bin'
+fish -c 'fish_add_path -U ~/.cargo/bin'
 fish -c 'set -Ux EDITOR (which nvim)'
 """
 install.darwin = """
