@@ -1,11 +1,6 @@
 [config]
 backup_dir = "~/.dotfiles_backup"
-enabled = [
-    "git",
-    "fish",
-    "fish_extras",
-    "zellij",
-]
+enabled = ["git", "fish", "fish_extras", "zellij"]
 
 [packages.homebrew]
 install.darwin = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
@@ -45,6 +40,7 @@ sudo chsh -s $(which fish) $(whoami)
 fish -c 'fish_add_path -U ~/.local/bin'
 fish -c 'fish_add_path -U ~/.cargo/bin'
 fish -c 'set -Ux EDITOR (which nvim)'
+fish -c 'set -Ux LESSCHARSET utf-8'
 """
 install.darwin = """
 brew install fish
