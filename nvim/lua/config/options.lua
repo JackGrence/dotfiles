@@ -4,6 +4,7 @@
 
 vim.opt.wrap = true
 vim.opt.linebreak = true
+vim.g.autoformat = false
 
 -- Enable the system clipboard register mapping
 vim.opt.clipboard = "unnamedplus"
