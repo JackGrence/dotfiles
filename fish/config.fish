@@ -3,7 +3,7 @@ if status is-interactive
     fish_config theme choose "Dracula Official"
 
     set -l AGENT_NAME "coding-agent-$ZELLIJ_SESSION_NAME-agent"
-    if set -q AGENT_NAME; and docker container inspect "$AGENT_NAME" >/dev/null 2>&1
+    if set -q ZELLIJ_SESSION_NAME; and docker container inspect "$AGENT_NAME" >/dev/null 2>&1
         set -l pane_dir_file "/tmp/zellij-$ZELLIJ_SESSION_NAME-"(zellij action current-tab-info -j | jq .tab_id)"-dir.txt"
         set -l target_dir (docker exec -e zellij_pane_dir="$pane_dir_file" -u ubuntu "$AGENT_NAME" \
           bash -c 'DIR="$(cat "$zellij_pane_dir" 2>/dev/null)"; [ -d "$DIR" ] && echo "$DIR" || echo "$HOME"')
